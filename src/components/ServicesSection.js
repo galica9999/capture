@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 //style
 import { About, Description, Image } from "../styles";
+//animations
+import { scrollReveal } from "../animation";
+import { useScroll } from "./useScroll";
 //images
 import clock from "../img/clock.svg";
 import diaphragm from "../img/diaphragm.svg";
@@ -10,8 +15,9 @@ import teamwork from "../img/teamwork.svg";
 import home2 from "../img/home2.png";
 
 const ServicesSection = () => {
+    const [element, controls] = useScroll();
     return (
-        <Services>
+        <Services ref={element} variants={scrollReveal} animate={controls}>
             <Description>
                 <h2>
                     High <span>quality</span> services
